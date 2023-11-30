@@ -1,8 +1,14 @@
-resource "aws_s3_bucket" "example" {
-  bucket = "instruqt-my-tf-test-bucket"
+module "s3_bucket" {
+  source = "terraform-aws-modules/s3-bucket/aws"
 
-  tags = {
-    Name        = "My bucket"
-    Environment = "Dev"
+  bucket = "instruqt-my-s3-bucket"
+  bucket_prefix = "instrqut-my-s3-bucket"
+  acl    = "private"
+
+  control_object_ownership = true
+  object_ownership         = "ObjectWriter"
+
+  versioning = {
+    enabled = true
   }
 }
